@@ -134,66 +134,74 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 md:pl-64 text-slate-900 font-inter">
+    <div className="min-h-screen bg-slate-50 md:pl-64 text-slate-900 font-inter transition-all duration-300">
       
       {/* Overlay Mobile (Fundo escuro quando menu está aberto) */}
-      {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/40 z-40 md:hidden backdrop-blur-sm transition-opacity"
-          onClick={() => setIsSidebarOpen(false)}
-        />
-      )}
+      <div 
+        className={`fixed inset-0 bg-slate-900/60 z-40 md:hidden backdrop-blur-sm transition-opacity duration-300 ${isSidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        onClick={() => setIsSidebarOpen(false)}
+        aria-hidden="true"
+      />
 
       {/* Navegação Lateral (Drawer) */}
-      <nav className={`
-        fixed top-0 bottom-0 left-0 z-50 w-64 bg-white border-r border-slate-200
-        transform transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none
-        flex flex-col p-3 gap-1 overflow-y-auto
+      <aside className={`
+        fixed top-0 bottom-0 left-0 z-50 w-72 md:w-64 bg-white border-r border-slate-200
+        transform transition-transform duration-300 cubic-bezier(0.4, 0, 0.2, 1) shadow-2xl md:shadow-none
+        flex flex-col p-4 gap-2 overflow-y-auto
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
         md:translate-x-0
       `}>
-        <div className="mb-8 px-6 pt-6 flex justify-between items-start">
+        <div className="mb-6 px-2 flex justify-between items-start">
           <div>
             <h1 className="text-3xl font-black text-slate-900 flex items-center gap-2 tracking-tighter italic">
               V<span className="text-purple-600">IA</span>gens
             </h1>
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-2">Planejamento Inteligente</p>
           </div>
-          <button onClick={() => setIsSidebarOpen(false)} className="md:hidden text-slate-400 hover:text-red-500">
+          <button 
+            onClick={() => setIsSidebarOpen(false)} 
+            className="md:hidden p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
+            aria-label="Fechar menu"
+          >
             <X size={24} />
           </button>
         </div>
         
-        <NavItem active={activeTab === 'dashboard'} onClick={() => handleNavClick('dashboard')} icon={<LayoutDashboard size={20} />} label="Voos" />
-        <NavItem active={activeTab === 'bus'} onClick={() => handleNavClick('bus')} icon={<Bus size={20} />} label="Ônibus" />
-        <NavItem active={activeTab === 'logistics'} onClick={() => handleNavClick('logistics')} icon={<Clock size={20} />} label="Conexões" />
-        <NavItem active={activeTab === 'stays'} onClick={() => handleNavClick('stays')} icon={<Building2 size={20} />} label="Hospedagem" />
-        <NavItem active={activeTab === 'tips'} onClick={() => handleNavClick('tips')} icon={<Compass size={20} />} label="Guias e Roteiros" />
-        <NavItem active={activeTab === 'budget'} onClick={() => handleNavClick('budget')} icon={<Wallet size={20} />} label="Financeiro" />
-      </nav>
+        <div className="flex-1 space-y-1">
+          <NavItem active={activeTab === 'dashboard'} onClick={() => handleNavClick('dashboard')} icon={<LayoutDashboard size={20} />} label="Voos" />
+          <NavItem active={activeTab === 'bus'} onClick={() => handleNavClick('bus')} icon={<Bus size={20} />} label="Ônibus" />
+          <NavItem active={activeTab === 'logistics'} onClick={() => handleNavClick('logistics')} icon={<Clock size={20} />} label="Conexões" />
+          <NavItem active={activeTab === 'stays'} onClick={() => handleNavClick('stays')} icon={<Building2 size={20} />} label="Hospedagem" />
+          <NavItem active={activeTab === 'tips'} onClick={() => handleNavClick('tips')} icon={<Compass size={20} />} label="Guias e Roteiros" />
+          <NavItem active={activeTab === 'budget'} onClick={() => handleNavClick('budget')} icon={<Wallet size={20} />} label="Financeiro" />
+        </div>
 
-      <main className="p-6 md:p-12 max-w-6xl mx-auto space-y-12 animate-in fade-in duration-700">
+        <div className="mt-auto pt-6 border-t border-slate-100 md:hidden">
+            <p className="text-xs text-center text-slate-400 font-medium">Toque fora para fechar</p>
+        </div>
+      </aside>
+
+      <main className="p-4 md:p-12 max-w-6xl mx-auto space-y-8 animate-in fade-in duration-700">
         
         {/* Header Mobile com Botão Menu */}
-        <div className="md:hidden flex justify-between items-center mb-6 sticky top-0 z-30 bg-slate-50/90 backdrop-blur-md py-4 -mx-6 px-6 border-b border-slate-200/50">
+        <header className="md:hidden flex justify-between items-center mb-6 sticky top-0 z-30 bg-slate-50/90 backdrop-blur-xl py-3 -mx-4 px-4 border-b border-slate-200/60 shadow-sm transition-all">
            <button 
              onClick={() => setIsSidebarOpen(true)}
-             className="p-2 -ml-2 text-slate-700 hover:bg-slate-200 rounded-xl transition-colors"
+             className="p-2 -ml-2 text-slate-700 hover:bg-white/80 rounded-xl transition-all active:scale-95"
+             aria-label="Abrir menu"
            >
              <Menu size={28} />
            </button>
            <h1 className="text-xl font-black text-slate-900 tracking-tighter italic">V<span className="text-purple-600">IA</span>gens</h1>
-           <div className="w-10 flex justify-end">
-             {/* Espaço reservado para balancear ou para o FAB se quiséssemos aqui */}
-           </div>
-        </div>
+           <div className="w-8" /> {/* Espaçador para balancear layout */}
+        </header>
 
         {/* --- DASHBOARD: VOOS INTERNACIONAIS --- */}
         {activeTab === 'dashboard' && (
           <div className="space-y-10">
             <header className="flex flex-col md:flex-row justify-between items-start gap-4 border-b pb-8">
               <div>
-                <h2 className="text-5xl font-black text-slate-900 tracking-tighter italic">GRU ➔ JNB</h2>
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter italic">GRU ➔ JNB</h2>
                 <p className="text-slate-500 font-bold italic text-lg">Resumo Oficial da Reserva Decolar</p>
               </div>
               <div className="bg-red-600 text-white p-6 rounded-3xl shadow-xl flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
@@ -526,9 +534,10 @@ export default function App() {
 
 function NavItem({ active, onClick, icon, label }: { active: boolean, onClick: () => void, icon: React.ReactNode, label: string }) {
   return (
-    <button onClick={onClick} className={`w-full flex items-center gap-3 px-8 py-5 rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.15em] transition-all whitespace-nowrap ${active ? 'bg-indigo-950 text-white shadow-2xl scale-105 italic' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-900'}`}>
+    <button onClick={onClick} className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl font-black text-[11px] uppercase tracking-[0.15em] transition-all duration-200 ${active ? 'bg-indigo-950 text-white shadow-xl translate-x-1 italic' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900 hover:translate-x-1'}`}>
       {icon}
       <span>{label}</span>
+      {active && <ArrowRight size={14} className="ml-auto opacity-50" />}
     </button>
   );
 }
