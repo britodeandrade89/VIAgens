@@ -1,5 +1,5 @@
 
-import { TicketDetails, SafariOption, ItineraryDay } from './types.ts';
+import { TicketDetails, SafariOption, ItineraryDay } from './types';
 
 export const INTERNATIONAL_FLIGHTS = {
   ida: {
