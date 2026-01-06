@@ -8,8 +8,8 @@ import {
 } from 'lucide-react';
 import { 
   TAAG_TICKET_INFO, INTERNATIONAL_FLIGHTS, SAA_FLIGHT_DEAL, SURVIVAL_TIPS, ACCOMMODATIONS, BUS_LOGISTICS, LOGISTICS_TIMELINE, REGIONS 
-} from './constants';
-import { BudgetEntry, ChatMessage } from './types';
+} from './constants.ts';
+import { BudgetEntry, ChatMessage } from './types.ts';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'bus' | 'logistics' | 'stays' | 'tips' | 'budget'>('dashboard');
