@@ -59,7 +59,7 @@ export const REGIONS = {
     profile: "Zona Turística & Orla",
     rioEquivalent: "Ipanema / Copacabana",
     safety: "Alta",
-    description: "Melhor calçadão para caminhadas. Próximo a tudo via Uber."
+    description: "Melhor calçadão para caminhas. Próximo a tudo via Uber."
   }
 };
 
@@ -137,15 +137,17 @@ export const BUS_LOGISTICS = {
 export const LOGISTICS_TIMELINE = [
   { time: '14:40', task: 'Pouso DT 577 em JNB', warning: false },
   { time: '15:40', task: 'Imigração & Coleta de Malas', warning: true },
-  { time: '17:15', task: 'Check-in South African Airways', warning: false },
-  { time: '18:45', task: 'Decolagem para CPT', highlight: true }
+  { time: '17:30', task: 'Check-in Airlink', warning: false },
+  { time: '19:30', task: 'Ir para o Portão (Gate)', warning: false },
+  { time: '20:35', task: 'Decolagem para CPT', highlight: true }
 ];
 
-export const SAA_FLIGHT_DEAL = {
-  company: "South African Airways",
-  roundTripPrice: 872.00,
-  outbound: { date: "26/01", time: "18:45", arrival: "21:00" },
-  return: { date: "02/02", time: "12:20", arrival: "14:20" }
+export const DOMESTIC_FLIGHT_DEAL = {
+  company: "Airlink",
+  pricePerPerson: 806.00,
+  outbound: { date: "26/01", time: "20:35", arrival: "22:50" },
+  return: { date: "02/02", time: "07:00", arrival: "09:05" },
+  baggage: "2 Malas Despachadas Grátis"
 };
 
 export const SURVIVAL_TIPS = {
