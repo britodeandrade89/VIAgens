@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI } from "@google/genai";
 import { 
@@ -14,7 +15,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'bus' | 'logistics' | 'stays' | 'tips' | 'budget'>('dashboard');
   const [budget, setBudget] = useState<BudgetEntry[]>([]);
   const [idaScenario, setIdaScenario] = useState<'via_leme' | 'direto_sp'>('direto_sp');
-  const [selectedTip, setSelectedTip] = useState<typeof SURVIVAL_TIPS.items[0] | null>(null);
   
   // UI State
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -319,41 +319,6 @@ export default function App() {
           </div>
         )}
 
-        {activeTab === 'tips' && (
-          <div className="space-y-12">
-            <header>
-              <h2 className="text-5xl font-black text-slate-900 tracking-tighter italic">Guias & Dicas</h2>
-              <p className="text-slate-500 font-bold italic text-lg mt-2">Manual de Sobrevivência SA</p>
-            </header>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-               {SURVIVAL_TIPS.items.map((tip, i) => (
-                 <button key={i} onClick={() => setSelectedTip(tip)} className="bg-white p-10 rounded-[3rem] border-2 border-slate-200 shadow-xl flex flex-col justify-between hover:border-indigo-600 hover:shadow-2xl transition-all text-left group">
-                    <div>
-                       <div className="text-5xl mb-6 filter drop-shadow-sm transform group-hover:scale-110 transition-transform duration-300">{tip.icon}</div>
-                       <h3 className="text-2xl font-black italic text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">{tip.title}</h3>
-                       <p className="text-slate-500 font-medium leading-relaxed">{tip.text}</p>
-                    </div>
-                    <div className="mt-8 flex items-center text-indigo-600 font-black text-xs uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
-                      Ler Guia Completo <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                 </button>
-               ))}
-            </div>
-
-            <div className="bg-indigo-600 rounded-[3rem] p-12 text-white relative overflow-hidden shadow-2xl">
-               <div className="relative z-10">
-                  <h3 className="text-3xl font-black italic mb-4">Roteiro Inteligente</h3>
-                  <p className="text-indigo-100 text-lg mb-8 max-w-xl">Não sabe o que fazer no dia livre? Peça para a nossa IA criar um roteiro personalizado baseado no seu perfil e orçamento.</p>
-                  <button onClick={() => { setIsChatOpen(true); setChatInput("Sugira um roteiro de 1 dia para Joanesburgo focado em história e cultura."); }} className="bg-white text-indigo-600 px-8 py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-indigo-50 transition-colors">
-                    Gerar Roteiro Agora
-                  </button>
-               </div>
-               <Compass className="absolute -right-12 -bottom-24 text-white/10" size={300} />
-            </div>
-          </div>
-        )}
-
         {activeTab === 'budget' && (
           <div className="space-y-12">
             <header className="flex flex-col md:flex-row justify-between items-end border-b pb-10 gap-6">
@@ -400,25 +365,6 @@ export default function App() {
            </div>
         </div>
       )}
-
-      {selectedTip && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedTip(null)}>
-          <div className="bg-white rounded-[2.5rem] p-8 md:p-12 max-w-2xl w-full shadow-2xl relative animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
-            <button onClick={() => setSelectedTip(null)} className="absolute top-6 right-6 p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors">
-              <X size={24} />
-            </button>
-            <div className="text-6xl mb-6">{selectedTip.icon}</div>
-            <h3 className="text-3xl font-black italic text-slate-900 mb-6">{selectedTip.title}</h3>
-            <div className="prose prose-slate prose-lg">
-              <p className="font-medium text-slate-600 leading-relaxed mb-6">{selectedTip.text}</p>
-              <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-100">
-                 <h4 className="text-indigo-900 font-bold mb-2 flex items-center gap-2"><Info size={18}/> Detalhes do Guia</h4>
-                 <p className="text-indigo-800/80 text-sm leading-relaxed">{selectedTip.details}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -459,7 +405,7 @@ function FlightCard({ title, flight, color }: { title: string, flight: any, colo
   );
 }
 
-const StayCard: React.FC<{ stay: any; onAdd: () => void }> = ({ stay, onAdd }) => {
+function StayCard({ stay, onAdd }: { stay: any, onAdd: () => void }) {
   return (
     <div className={`bg-white rounded-[3.5rem] border-2 ${stay.isPreferred ? 'border-indigo-600' : 'border-slate-200'} shadow-2xl overflow-hidden`}>
       <div className={`${stay.isPreferred ? 'bg-indigo-600' : 'bg-slate-900'} p-12 text-white`}>

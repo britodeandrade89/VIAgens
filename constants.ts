@@ -1,3 +1,4 @@
+
 import { TicketDetails, SafariOption, ItineraryDay } from './types';
 
 export const INTERNATIONAL_FLIGHTS = {
@@ -151,29 +152,9 @@ export const DOMESTIC_FLIGHT_DEAL = {
 
 export const SURVIVAL_TIPS = {
   items: [
-    { 
-      title: "Transporte", 
-      icon: "🚗", 
-      text: "Use Uber Black em JNB. Gautrain é ótimo mas fecha às 20:30.",
-      details: "Para segurança máxima em Joanesburgo, a regra de ouro é Uber Black ou Van. O Gautrain é excelente para ir do aeroporto para Sandton/Rosebank, mas evite horários de pico se estiver com muitas malas. Alugar carro é uma ótima opção para a Garden Route e Kruger, mas lembre-se da mão inglesa! Em Cape Town, o MyCiTi Bus funciona bem, mas Uber continua sendo o melhor custo-benefício para casais."
-    },
-    { 
-      title: "Bariátrica", 
-      icon: "🍱", 
-      text: "Biltong (carne seca) é 50% proteína. Perfeito para o pós.",
-      details: "A África do Sul é o paraíso das proteínas. O Biltong (carne seca curada) é um snack perfeito: alto valor proteico, zero açúcar e fácil de carregar na bolsa. Nos restaurantes, as porções costumam ser generosas, então pedir 'Starters' (entradas) como prato principal é uma estratégia inteligente. Carnes de caça (venison) como Kudu e Impala são magras e deliciosas."
-    },
-    { 
-      title: "Internet", 
-      icon: "🌐", 
-      text: " Vodacom ou MTN têm as melhores coberturas.",
-      details: "Ao desembarcar em JNB, vá direto à loja da Vodacom ou MTN no saguão de desembarque. Um chip com 10GB de dados custa cerca de R$ 100-150. Evite roaming internacional do Brasil que costuma ser lento e caro. O Wi-Fi em hotéis e restaurantes é geralmente rápido e gratuito. Se seu celular aceita eSIM, o Airalo funciona bem, mas é um pouco mais caro que o chip local."
-    },
-    { 
-      title: "Segurança", 
-      icon: "🛡️", 
-      text: "Celular sempre guardado. Use o Uber dentro dos locais.",
-      details: "A regra número 1: Não pareça um turista perdido. Evite andar com o celular na mão na rua, mesmo em áreas 'seguras'. Em restaurantes, não deixe carteira ou celular em cima da mesa. À noite, use Uber porta-a-porta, não caminhe mesmo que seja perto. No carro, mantenha vidros fechados e portas travadas. Confie no seu instinto: se uma rua parece deserta demais, evite."
-    }
+    { title: "Transporte", icon: "🚗", text: "Use Uber Black em JNB. Gautrain é ótimo mas fecha às 20:30." },
+    { title: "Bariátrica", icon: "🍱", text: "Biltong (carne seca) é 50% proteína. Perfeito para o pós." },
+    { title: "Internet", icon: "🌐", text: " Vodacom ou MTN têm as melhores coberturas." },
+    { title: "Segurança", icon: "🛡️", text: "Celular sempre guardado. Use o Uber dentro dos locais." }
   ]
 };
